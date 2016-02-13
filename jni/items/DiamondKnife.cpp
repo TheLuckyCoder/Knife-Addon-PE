@@ -7,7 +7,6 @@ DiamondKnife::DiamondKnife(short itemId) : Item("diamondKnife", itemId)
 	this->setMaxStackSize(1);
 	this->setMaxDamage(781);
 	this->setHandEquipped();
-	this->setStackedByData(true);
 }
 
 bool DiamondKnife::canDestroyInCreative() const{
@@ -30,6 +29,6 @@ void DiamondKnife::hurtEnemy(ItemInstance *item, Mob *m1, Mob *m2) {
 	item->hurtAndBreak(1, m2);
 }
 
-/*void DiamondKnife::mineBlock(ItemInstance *item, BlockID block, int x, int y, int z, Mob *m){
+void DiamondKnife::mineBlock(ItemInstance *item, BlockID block, int x, int y, int z, Mob *m){
 	item->hurtAndBreak(2, m);
-}*/
+}

@@ -7,7 +7,6 @@ IronKnife::IronKnife(short itemId) : Item("ironKnife", itemId)
 	this->setMaxStackSize(1);
 	this->setMaxDamage(125);
 	this->setHandEquipped();
-	this->setStackedByData(true);
 }
 
 bool IronKnife::canDestroyInCreative() const{
@@ -30,6 +29,6 @@ void IronKnife::hurtEnemy(ItemInstance *item, Mob *m1, Mob *m2) {
 	item->hurtAndBreak(1, m2);
 }
 
-/*void IronKnife::mineBlock(ItemInstance *item, BlockID block, int x, int y, int z, Mob *m){
+void IronKnife::mineBlock(ItemInstance *item, BlockID block, int x, int y, int z, Mob *m){
 	item->hurtAndBreak(2, m);
-}*/
+}

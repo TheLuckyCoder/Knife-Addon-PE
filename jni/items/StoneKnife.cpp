@@ -30,6 +30,6 @@ void StoneKnife::hurtEnemy(ItemInstance *item, Mob *m1, Mob *m2) {
 	item->hurtAndBreak(1, m2);
 }
 
-/*void StoneKnife::mineBlock(ItemInstance *item, BlockID block, int x, int y, int z, Mob *m){
+void StoneKnife::mineBlock(ItemInstance *item, BlockID block, int x, int y, int z, Mob *m){
 	item->hurtAndBreak(2, m);
-}*/
+}

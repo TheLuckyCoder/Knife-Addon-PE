@@ -7,7 +7,6 @@ GoldKnife::GoldKnife(short itemId) : Item("goldKnife", itemId)
 	this->setMaxStackSize(1);
 	this->setMaxDamage(16);
 	this->setHandEquipped();
-	this->setStackedByData(true);
 }
 
 bool GoldKnife::canDestroyInCreative() const{
@@ -30,6 +29,6 @@ void GoldKnife::hurtEnemy(ItemInstance *item, Mob *m1, Mob *m2) {
 	item->hurtAndBreak(1, m2);
 }
 
-/*void GoldKnife::mineBlock(ItemInstance *item, BlockID block, int x, int y, int z, Mob *m){
+void GoldKnife::mineBlock(ItemInstance *item, BlockID block, int x, int y, int z, Mob *m){
 	item->hurtAndBreak(2, m);
-}*/
+}

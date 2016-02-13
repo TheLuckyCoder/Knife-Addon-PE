@@ -7,7 +7,6 @@ WoodKnife::WoodKnife(short itemId) : Item("woodKnife", itemId)
 	this->setMaxStackSize(1);
 	this->setMaxDamage(30);
 	this->setHandEquipped();
-	this->setStackedByData(true);
 }
 
 bool WoodKnife::canDestroyInCreative() const{
@@ -30,6 +29,6 @@ void WoodKnife::hurtEnemy(ItemInstance *item, Mob *m1, Mob *m) {
 	item->hurtAndBreak(1, m);
 }
 
-/*void WoodKnife::mineBlock(ItemInstance *item, BlockID block, int x, int y, int z, Mob *m){
+void WoodKnife::mineBlock(ItemInstance *item, BlockID block, int x, int y, int z, Mob *m){
 	item->hurtAndBreak(2, m);
-}*/
+}

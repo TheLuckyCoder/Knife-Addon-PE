@@ -5,7 +5,7 @@
 #include <substrate.h>
 
 #include "mcpe/locale/I18n.h"
-#include "mcpe/item/Item.h"
+#include "mcpe/world/item/Item.h"
 #include "items/Knifes.h"
 
 #define LOG_TAG "Knife-Mod"
@@ -15,12 +15,13 @@
 void (*_Item$initItems)();
 void Item$initItems()
 {
+	Item::mItems[1800] = new WoodKnife(1800 - 0x100);
+	Item::mItems[1801] = new StoneKnife(1801 - 0x100);
+	Item::mItems[1802] = new IronKnife(1802 - 0x100);
+	Item::mItems[1803] = new GoldKnife(1803 - 0x100);
+	Item::mItems[1804] = new DiamondKnife(1804 - 0x100);
+	
 	_Item$initItems();
-	Item::mItems[1820] = new WoodKnife(1820 - 0x100);
-	Item::mItems[1821] = new StoneKnife(1821 - 0x100);
-	Item::mItems[1822] = new IronKnife(1822 - 0x100);
-	Item::mItems[1823] = new GoldKnife(1823 - 0x100);
-	Item::mItems[1824] = new DiamondKnife(1824 - 0x100);
 }
 
 void (*_Item$initCreativeItems)();
@@ -28,14 +29,13 @@ void Item$initCreativeItems()
 {
 	_Item$initCreativeItems();
 
-	Item::addCreativeItem(1820, 0);
-	Item::addCreativeItem(1821, 0);
-	Item::addCreativeItem(1822, 0);
-	Item::addCreativeItem(1823, 0);
-	Item::addCreativeItem(1824, 0);
+	Item::addCreativeItem(1800, 0);
+	Item::addCreativeItem(1801, 0);
+	Item::addCreativeItem(1802, 0);
+	Item::addCreativeItem(1803, 0);
+	Item::addCreativeItem(1804, 0);
 }
 
-//Old method of adding a shaped recipe
 /*void (*_SurvivalInventoryScreen$_updateCraftableItems)(SurvivalInventoryScreen*);
 void SurvivalInventoryScreen$_updateCraftableItems(SurvivalInventoryScreen* screen)
 {
@@ -73,9 +73,9 @@ std::string I18n$get(std::string const& key, std::vector<std::string> const& a)
 
 JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) 
 {
+	//MSHookFunction((void*) &SurvivalInventoryScreen::_updateCraftableItems, (void*) &SurvivalInventoryScreen$_updateCraftableItems, (void**) &_SurvivalInventoryScreen$_updateCraftableItems);
 	MSHookFunction((void*) &Item::initItems, (void*) &Item$initItems, (void**) &_Item$initItems);
 	MSHookFunction((void*) &Item::initCreativeItems, (void*) &Item$initCreativeItems, (void**) &_Item$initCreativeItems);
-	//MSHookFunction((void*) &SurvivalInventoryScreen::_updateCraftableItems, (void*) &SurvivalInventoryScreen$_updateCraftableItems, (void**) &_SurvivalInventoryScreen$_updateCraftableItems);
 	MSHookFunction((void*) &I18n::get, (void*) &I18n$get, (void**) &_I18n$get);
 
 	return JNI_VERSION_1_2;

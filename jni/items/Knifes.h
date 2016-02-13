@@ -1,7 +1,8 @@
 #pragma once
 
-#include "mcpe/item/Item.h"
-#include "mcpe/item/ItemInstance.h"
+#include "mcpe/world/item/Item.h"
+#include "mcpe/world/item/ItemInstance.h"
+#include "mcpe/world/level/block/Block.h"
 
 class WoodKnife : public Item
 {
@@ -15,7 +16,7 @@ public:
 	virtual int getEnchantSlot() const;
 	virtual int getEnchantValue() const;
 	virtual void hurtEnemy(ItemInstance*, Mob*, Mob*);
-	//virtual void mineBlock(ItemInstance*, BlockID, int, int, int, Mob*);
+	virtual void mineBlock(ItemInstance*, BlockID, int, int, int, Mob*);
 };
 
 class StoneKnife : public Item
@@ -30,7 +31,7 @@ public:
 	virtual int getEnchantSlot() const;
 	virtual int getEnchantValue() const;
 	virtual void hurtEnemy(ItemInstance*, Mob*, Mob*);
-	//virtual void mineBlock(ItemInstance*, BlockID, int, int, int, Mob*);
+	virtual void mineBlock(ItemInstance*, BlockID, int, int, int, Mob*);
 };
 
 class IronKnife : public Item
@@ -45,7 +46,7 @@ public:
 	virtual int getEnchantSlot() const;
 	virtual int getEnchantValue() const;
 	virtual void hurtEnemy(ItemInstance*, Mob*, Mob*);
-	//virtual void mineBlock(ItemInstance*, BlockID, int, int, int, Mob*);
+	virtual void mineBlock(ItemInstance*, BlockID, int, int, int, Mob*);
 };
 
 class GoldKnife : public Item
@@ -60,7 +61,7 @@ public:
 	virtual int getEnchantSlot() const;
 	virtual int getEnchantValue() const;
 	virtual void hurtEnemy(ItemInstance*, Mob*, Mob*);
-	//virtual void mineBlock(ItemInstance*, BlockID, int, int, int, Mob*);
+	virtual void mineBlock(ItemInstance*, BlockID, int, int, int, Mob*);
 };
 
 class DiamondKnife : public Item
@@ -75,5 +76,5 @@ public:
 	virtual int getEnchantSlot() const;
 	virtual int getEnchantValue() const;
 	virtual void hurtEnemy(ItemInstance*, Mob*, Mob*);
-	//virtual void mineBlock(ItemInstance*, BlockID, int, int, int, Mob*);
+	virtual void mineBlock(ItemInstance*, BlockID, int, int, int, Mob*);
 };
