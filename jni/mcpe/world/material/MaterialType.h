@@ -10,7 +10,7 @@ enum class MaterialType : int {
 	LAVA,
 	PLANT,
 	DECORATION,
-	WOOL = 11,
+	WOOl = 11,
 	BED,
 	FIRE,
 	SAND,

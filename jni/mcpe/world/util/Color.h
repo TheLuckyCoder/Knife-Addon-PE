@@ -6,7 +6,6 @@ public:
 	
 	float r, g, b, a;
 	
-	
 	static Color fromHSB(float, float, float);
 
 	int toARGB() const;

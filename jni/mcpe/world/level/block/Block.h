@@ -15,6 +15,7 @@ struct Vec3;
 class Brightness;
 class TextureAtlas;
 class Container;
+class CreativeItemCategory;
 #include "../../../client/renderer/texture/TextureUVCoordinateSet.h"
 #include "../../../client/renderer/texture/TextureAtlasTextureItem.h"
 #include "../../util/Color.h"
@@ -22,7 +23,6 @@ class Container;
 #include "../../../CommonTypes.h"
 #include "entity/BlockEntityType.h"
 #include "BlockShape.h"
-#include "../../../CreativeItemCategory.h"
 
 class Block {
 public:
@@ -67,7 +67,7 @@ public:
 	bool heavy; // 108
 	float hardness; // 112
 	float explosionResistance; // 116
-	CreativeItemCategory creativeCategory; // 120
+	//CreativeItemCategory creativeCategory; // 120
 	AABB hitbox; // 124
 
 

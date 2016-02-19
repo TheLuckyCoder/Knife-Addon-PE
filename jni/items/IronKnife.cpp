@@ -1,6 +1,6 @@
-#include "Knifes.h"
+#include "IronKnife.h"
 
-IronKnife::IronKnife(short itemId) : Item("ironKnife", itemId)
+IronKnife::IronKnife(short itemId) : Item("knifeIron", itemId)
 {
 	this->creativeCategory = 3;
 	this->setIcon("knife", 2);
