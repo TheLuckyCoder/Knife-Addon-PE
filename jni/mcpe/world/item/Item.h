@@ -1,12 +1,11 @@
 #pragma once
 #include <string>
-
+#include "ItemInstance.h"
 class IDataOutput;
 class TextureUVCoordinateSet;
 class CreativeItemCategory;
 class UseAnimation;
 class Block;
-class ItemInstance;
 class Player;
 class BlockSource;
 class Container;
@@ -105,6 +104,4 @@ public:
     static void initCreativeItems(); //00541fa4
     static void initItems(); //0055b0b4
     static void addBlockItems(); //0055f9c0
-
 };
-

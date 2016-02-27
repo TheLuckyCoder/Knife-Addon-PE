@@ -7,6 +7,7 @@ WoodKnife::WoodKnife(short itemId) : Item("knifeWood", itemId)
 	this->setMaxStackSize(1);
 	this->setMaxDamage(30);
 	this->setHandEquipped();
+	this->setStackedByData(true);
 }
 
 bool WoodKnife::canDestroyInCreative() const{

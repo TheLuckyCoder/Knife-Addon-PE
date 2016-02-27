@@ -7,6 +7,7 @@ GoldKnife::GoldKnife(short itemId) : Item("knifeGold", itemId)
 	this->setMaxStackSize(1);
 	this->setMaxDamage(16);
 	this->setHandEquipped();
+	this->setStackedByData(true);
 }
 
 bool GoldKnife::canDestroyInCreative() const{
