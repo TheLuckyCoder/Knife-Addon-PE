@@ -5,10 +5,10 @@
 GoldKnife::GoldKnife(short itemId) : Item("goldKnife", itemId - 256)
 {
 	Item::mItems[itemId] = this;
-	creativeCategory = CreativeItemCategory::TOOLS;
-	setIcon("knife_gold", 0);
+	setCategory(CreativeItemCategory::TOOLS);
+	setIcon("knife", 3);
 	setMaxStackSize(1);
-	setMaxDamage(Item::mSword_gold->getMaxDamage() / 2);
+	setMaxDamage(16);
 	setHandEquipped();
 }
 

@@ -5,10 +5,10 @@
 DiamondKnife::DiamondKnife(short itemId) : Item("diamondKnife", itemId - 256)
 {
 	Item::mItems[itemId] = this,
-	creativeCategory = CreativeItemCategory::TOOLS;
-	setIcon("knife_diamond", 0);
+	setCategory(CreativeItemCategory::TOOLS);
+	setIcon("knife", 4);
 	setMaxStackSize(1);
-	setMaxDamage(Item::mSword_diamond->getMaxDamage() / 2);
+	setMaxDamage(781);
 	setHandEquipped();
 }
 

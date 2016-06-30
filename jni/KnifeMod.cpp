@@ -1,7 +1,5 @@
 #include <jni.h>
 #include <stdlib.h>
-#include <string>
-#include <memory>
 #include <substrate.h>
 
 #include "minecraftpe/locale/I18n.h"
@@ -18,11 +16,11 @@
 void (*_Item$initItems)();
 void Item$initItems()
 {
-	new WoodKnife(470);
-	new StoneKnife(471);
-	new IronKnife(472);
-	new GoldKnife(473);
-	new DiamondKnife(474);
+	new WoodKnife(500);
+	new StoneKnife(501);
+	new IronKnife(502);
+	new GoldKnife(503);
+	new DiamondKnife(504);
 	
 	_Item$initItems();
 }
@@ -32,7 +30,7 @@ void Item$initCreativeItems()
 {
 	_Item$initCreativeItems();
 
-	for(int itemId = 470; itemId <=474; itemId++)
+	for(int itemId = 500; itemId <= 504; itemId++)
 		Item::addCreativeItem(itemId, 0);
 }
 

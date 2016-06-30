@@ -5,10 +5,10 @@
 IronKnife::IronKnife(short itemId) : Item("ironKnife", itemId - 256)
 {
 	Item::mItems[itemId] = this;
-	creativeCategory = CreativeItemCategory::TOOLS;
-	setIcon("knife_iron", 0);
+	setCategory(CreativeItemCategory::TOOLS);
+	setIcon("knife", 2);
 	setMaxStackSize(1);
-	setMaxDamage(Item::mSword_iron->getMaxDamage() / 2);
+	setMaxDamage(125);
 	setHandEquipped();
 }
 

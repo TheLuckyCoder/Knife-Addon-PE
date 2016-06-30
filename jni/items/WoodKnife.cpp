@@ -5,10 +5,10 @@
 WoodKnife::WoodKnife(short itemId) : Item("woodKnife", itemId - 256)
 {
 	Item::mItems[itemId] = this;
-	creativeCategory = CreativeItemCategory::TOOLS;
-	setIcon("knife_wood", 0);
+	setCategory(CreativeItemCategory::TOOLS);
+	setIcon("knife", 0);
 	setMaxStackSize(1);
-	setMaxDamage(Item::mSword_wood->getMaxDamage() / 2);
+	setMaxDamage(30);
 	setHandEquipped();
 }
 
