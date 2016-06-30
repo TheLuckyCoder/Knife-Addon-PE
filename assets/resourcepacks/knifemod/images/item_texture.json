@@ -1,0 +1,15 @@
+{
+  "resource_pack_name": "knifemod",
+  "texture_name": "atlas.items",
+  "texture_data": {
+	"knife": {
+		"textures" : [
+			"item.wood.knife",
+			"item.stone.knife",
+			"item.iron.knife",
+			"item.gold.knife",
+			"item.diamond.knife"
+		]
+	 }
+	}
+}

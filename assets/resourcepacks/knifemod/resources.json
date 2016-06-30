@@ -1,0 +1,16 @@
+{
+  "pack_id": "knifemod",
+  "name": "resourcePack.vanilla.name",
+  "description": "resourcePack.vanilla.description",
+  "resources": {
+    "textures": {
+      "item.wood.knife": "images/items/knife_wood.png",
+      "item.stone.knife": "images/items/knife_stone.png",
+      "item.iron.knife": "images/items/knife_iron.png",
+      "item.gold.knife": "images/items/knife_gold.png",
+      "item.diamond.knife": "images/items/knife_diamond.png"
+    "metas": {
+      "atlas.items.meta": "images/item_texture.json"
+    }
+  }
+}

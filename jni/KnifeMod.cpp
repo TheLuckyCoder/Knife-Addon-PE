@@ -17,10 +17,10 @@ void (*_Item$initItems)();
 void Item$initItems()
 {
 	new WoodKnife(500);
-	new StoneKnife(501);
-	new IronKnife(502);
-	new GoldKnife(503);
-	new DiamondKnife(504);
+	//new StoneKnife(501);
+	//new IronKnife(502);
+	//new GoldKnife(503);
+	//new DiamondKnife(504);
 	
 	_Item$initItems();
 }

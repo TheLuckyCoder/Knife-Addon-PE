@@ -1,16 +1,11 @@
 #pragma once
 
-#include "minecraftpe/world/item/Item.h"
+#include "KnifeItem.h"
 
-class StoneKnife : public Item
+class StoneKnife : public KnifeItem
 {
 public:
 	StoneKnife(short itemId);
 
-	virtual bool canDestroyInCreative() const;
 	virtual int getAttackDamage();
-	virtual int getEnchantSlot() const;
-	virtual int getEnchantValue() const;
-	virtual void hurtEnemy(ItemInstance*, Mob*, Mob*);
-	virtual void mineBlock(ItemInstance*, BlockID, int, int, int, Mob*);
 };
