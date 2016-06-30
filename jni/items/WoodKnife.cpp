@@ -1,12 +1,14 @@
 #include "WoodKnife.h"
+#include "minecraftpe/world/item/ItemInstance.h"
+#include "minecraftpe/world/level/block/Block.h"
 
-WoodKnife::WoodKnife(short itemId) : Item("knifeWood", itemId - 256)
+WoodKnife::WoodKnife(short itemId) : Item("woodKnife", itemId - 256)
 {
 	Item::mItems[itemId] = this;
-	creativeCategory = 3;
-	setIcon("knife", 0);
+	creativeCategory = CreativeItemCategory::TOOLS;
+	setIcon("knife_wood", 0);
 	setMaxStackSize(1);
-	setMaxDamage(30);
+	setMaxDamage(Item::mSword_wood->getMaxDamage() / 2);
 	setHandEquipped();
 }
 
@@ -17,7 +19,7 @@ bool WoodKnife::canDestroyInCreative() const
 
 int WoodKnife::getAttackDamage()
 {
-	return (Item::mSword_wood->getAttackDamage / 2);
+	return (Item::mSword_wood->getAttackDamage() / 2);
 }
 
 int WoodKnife::getEnchantSlot() const

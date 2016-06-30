@@ -1,12 +1,14 @@
 #include "StoneKnife.h"
+#include "minecraftpe/world/item/ItemInstance.h"
+#include "minecraftpe/world/level/block/Block.h"
 
-StoneKnife::StoneKnife(short itemId) : Item("knifeStone", itemId - 256)
+StoneKnife::StoneKnife(short itemId) : Item("stoneKnife", itemId - 256)
 {
 	Item::mItems[itemId] = this;
-	creativeCategory = 3;
-	setIcon("knife", 1);
+	creativeCategory = CreativeItemCategory::TOOLS;
+	setIcon("knife_stone", 0);
 	setMaxStackSize(1);
-	setMaxDamage(66);
+	setMaxDamage(Item::mSword_stone->getMaxDamage() / 2);
 	setHandEquipped();
 }
 
@@ -17,7 +19,7 @@ bool StoneKnife::canDestroyInCreative() const
 
 int StoneKnife::getAttackDamage()
 {
-	return (Item::mSword_stone->getAttackDamage / 2);
+	return (Item::mSword_stone->getAttackDamage() / 2);
 }
 
 int StoneKnife::getEnchantSlot() const

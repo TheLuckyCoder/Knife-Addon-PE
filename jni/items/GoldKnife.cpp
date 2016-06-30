@@ -1,12 +1,14 @@
 #include "GoldKnife.h"
+#include "minecraftpe/world/item/ItemInstance.h"
+#include "minecraftpe/world/level/block/Block.h"
 
-GoldKnife::GoldKnife(short itemId) : Item("knifeGold", itemId - 256)
+GoldKnife::GoldKnife(short itemId) : Item("goldKnife", itemId - 256)
 {
 	Item::mItems[itemId] = this;
-	creativeCategory = 3;
-	setIcon("knife", 3);
+	creativeCategory = CreativeItemCategory::TOOLS;
+	setIcon("knife_gold", 0);
 	setMaxStackSize(1);
-	setMaxDamage(16);
+	setMaxDamage(Item::mSword_gold->getMaxDamage() / 2);
 	setHandEquipped();
 }
 
@@ -17,7 +19,7 @@ bool GoldKnife::canDestroyInCreative() const
 
 int GoldKnife::getAttackDamage()
 {
-	return (Item::mSword_gold->getAttackDamage / 2);
+	return (Item::mSword_gold->getAttackDamage() / 2);
 }
 
 int GoldKnife::getEnchantSlot() const

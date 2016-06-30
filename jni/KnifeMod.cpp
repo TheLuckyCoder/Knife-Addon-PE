@@ -4,8 +4,7 @@
 #include <memory>
 #include <substrate.h>
 
-#include "mcpe/locale/I18n.h"
-#include "mcpe/world/item/Item.h"
+#include "minecraftpe/locale/I18n.h"
 
 #include "items/WoodKnife.h"
 #include "items/StoneKnife.h"
@@ -33,20 +32,20 @@ void Item$initCreativeItems()
 {
 	_Item$initCreativeItems();
 
-	for(itemId = 470; itemId <=474; itemId++)
+	for(int itemId = 470; itemId <=474; itemId++)
 		Item::addCreativeItem(itemId, 0);
 }
 
-std::string (*_I18n$get)(const std::string&, std::vector<std::string>&);
-std::string I18n$get(const std::string &key, const std::vector<std::string> &a) 
+static std::string (*_I18n$get)(const std::string&);
+static std::string I18n$get(const std::string &key) 
 {
-	if(key == "item.knifeWood.name") return "Wooden Knife";
-	if(key == "item.knifeStone.name") return "Stone Knife";
-	if(key == "item.knifeIron.name") return "Iron Knife";
-	if(key == "item.knifeGold.name") return "Gold Knife";
-	if(key == "item.knifeDiamond.name") return "Diamond Knife";
+	if(key == "item.woodKnife.name") return "Wooden Knife";
+	if(key == "item.stoneKnife.name") return "Stone Knife";
+	if(key == "item.ironKnife.name") return "Iron Knife";
+	if(key == "item.goldKnife.name") return "Gold Knife";
+	if(key == "item.diamondKnife.name") return "Diamond Knife";
 	
-	return _I18n$get(key, a);
+	return _I18n$get(key);
 }
 
 JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved) 

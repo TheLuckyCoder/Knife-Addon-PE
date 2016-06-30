@@ -1,12 +1,14 @@
 #include "IronKnife.h"
+#include "minecraftpe/world/item/ItemInstance.h"
+#include "minecraftpe/world/level/block/Block.h"
 
-IronKnife::IronKnife(short itemId) : Item("knifeIron", itemId - 256)
+IronKnife::IronKnife(short itemId) : Item("ironKnife", itemId - 256)
 {
 	Item::mItems[itemId] = this;
-	creativeCategory = 3;
-	setIcon("knife", 2);
+	creativeCategory = CreativeItemCategory::TOOLS;
+	setIcon("knife_iron", 0);
 	setMaxStackSize(1);
-	setMaxDamage(125);
+	setMaxDamage(Item::mSword_iron->getMaxDamage() / 2);
 	setHandEquipped();
 }
 
@@ -17,7 +19,7 @@ bool IronKnife::canDestroyInCreative() const
 
 int IronKnife::getAttackDamage()
 {
-	return (Item::mSword_iron->getAttackDamage / 2);
+	return (Item::mSword_iron->getAttackDamage() / 2);
 }
 
 int IronKnife::getEnchantSlot() const

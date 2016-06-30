@@ -1,15 +1,12 @@
 #pragma once
 
-#include "mcpe/world/item/Item.h"
-#include "mcpe/world/level/block/Block.h"
+#include "minecraftpe/world/item/Item.h"
 
 class DiamondKnife : public Item
 {
 public:
 	DiamondKnife(short itemId);
 
-public:
-    DiamondKnife(std::string);
 	virtual bool canDestroyInCreative() const;
 	virtual int getAttackDamage();
 	virtual int getEnchantSlot() const;

@@ -1,12 +1,14 @@
 #include "DiamondKnife.h"
+#include "minecraftpe/world/item/ItemInstance.h"
+#include "minecraftpe/world/level/block/Block.h"
 
-DiamondKnife::DiamondKnife(short itemId) : Item("knifeDiamond", itemId - 256)
+DiamondKnife::DiamondKnife(short itemId) : Item("diamondKnife", itemId - 256)
 {
 	Item::mItems[itemId] = this,
-	creativeCategory = 3;
-	setIcon("knife", 4);
+	creativeCategory = CreativeItemCategory::TOOLS;
+	setIcon("knife_diamond", 0);
 	setMaxStackSize(1);
-	setMaxDamage(781);
+	setMaxDamage(Item::mSword_diamond->getMaxDamage() / 2);
 	setHandEquipped();
 }
 
@@ -17,7 +19,7 @@ bool DiamondKnife::canDestroyInCreative() const
 
 int DiamondKnife::getAttackDamage()
 {
-	return (Item::mSword_diamond->getAttackDamage / 2);
+	return (Item::mSword_diamond->getAttackDamage() / 2);
 }
 
 int DiamondKnife::getEnchantSlot() const
