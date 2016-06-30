@@ -1,35 +1,40 @@
 #include "IronKnife.h"
 
-IronKnife::IronKnife(short itemId) : Item("knifeIron", itemId)
+IronKnife::IronKnife(short itemId) : Item("knifeIron", itemId - 256)
 {
-	this->creativeCategory = 3;
-	this->setIcon("knife", 2);
-	this->setMaxStackSize(1);
-	this->setMaxDamage(125);
-	this->setHandEquipped();
-	this->setStackedByData(true);
+	Item::mItems[itemId] = this;
+	creativeCategory = 3;
+	setIcon("knife", 2);
+	setMaxStackSize(1);
+	setMaxDamage(125);
+	setHandEquipped();
 }
 
-bool IronKnife::canDestroyInCreative() const{
+bool IronKnife::canDestroyInCreative() const
+{
 	return false;
 }
 
-int IronKnife::getAttackDamage() {
-	return 3.5F;
+int IronKnife::getAttackDamage()
+{
+	return (Item::mSword_iron->getAttackDamage / 2);
 }
 
-int IronKnife::getEnchantSlot() const{
+int IronKnife::getEnchantSlot() const
+{
 	return 16;
 }
 
-int IronKnife::getEnchantValue() const{
+int IronKnife::getEnchantValue() const
+{
 	return 1;
 }
 
-void IronKnife::hurtEnemy(ItemInstance *item, Mob *m1, Mob *m2) {
-	item->hurtAndBreak(1, m2);
+void IronKnife::hurtEnemy(ItemInstance *item, Mob *attacker, Mob *victim)
+{
+	item->hurtAndBreak(1, victim);
 }
 
-void IronKnife::mineBlock(ItemInstance *item, BlockID block, int x, int y, int z, Mob *m){
-	item->hurtAndBreak(2, m);
+void IronKnife::mineBlock(ItemInstance *item, BlockID block, int x, int y, int z, Mob *mob){
+	item->hurtAndBreak(2, mob);
 }
