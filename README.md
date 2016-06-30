@@ -1,2 +1,3 @@
 # Knife-Mod-MCPE
-Knife Addon for Minecraft PE
+This mod adds Knifes to Minecraft PE
+
