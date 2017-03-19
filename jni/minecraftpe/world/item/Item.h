@@ -2,11 +2,12 @@
 
 #include <string>
 #include <memory>
+#include <vector>
 
 #include "../../CreativeItemCategory.h"
-#include "../../CommonTypes.h"
+#include "../level/block/BlockID.h"
 #include "../../UseAnimation.h"
-
+#include "../level/block/BlockShape.h"
 class TextureUVCoordinateSet;
 struct SeedItemComponent;
 class FoodItemComponent;
@@ -19,50 +20,85 @@ class Level;
 class Player;
 class Container;
 class BlockSource;
+class Color;
 struct Vec3;
 struct IDataInput;
 struct IDataOutput;
+class Color;
+class Random;
+class ResourcePackManager;
+class TextureAtlasItem;
 namespace Json { class Value; };
 
-class Item {
+// Size: 104
+class Item
+{
 public:
-	/* constructor */
+	class Tier
+	{
+	public:
+		ItemInstance* getTierItem() const;
+
+		static Tier* WOOD;
+		static Tier* STONE;
+		static Tier* IRON;
+		static Tier* GOLD;
+		static Tier* DIAMOND;
+	};
+
+	/* copy constructor */
 	Item(const std::string&, short);
 
 	/* fields */
-	uint8_t _maxStackSize; // 4
-	std::string atlas; // 8
+	uint8_t maxStackSize; // 4
+	std::string iconAtlasName; // 8
 	int frameCount; // 12
-	short idk2; // 16
+	short filler1; // 16
 	short itemId; // 18
-	std::string name; // 20
-	short maxDamage; // 24
-	short properties; // 26
-	int useDuration; // 28
-	BlockID blockId; // 32
-	UseAnimation useAnimation; // 33
-	CreativeItemCategory creativeCategory; // 36
-	int idk3; // 40
-	int hoverTextColor; // 44
-	TextureUVCoordinateSet& icon; // 48
-	int idk5; // 52
-	std::unique_ptr<FoodItemComponent> _foodDetails; // 56
-	std::unique_ptr<SeedItemComponent> _seedDetails; // 60
+	std::string descriptionId; // 20 : item...name
+	std::string descriptionName; // 24
+	bool mirroredArt; //28
+	short maxDamage; // 30
+	bool foil; // 32
+	bool handEquipped; // 33
+	bool stackedByData; // 34
+	int maxUseDuration; // 36
+	bool explodable; // 40
+	bool shouldDespawn; // 41
+	BlockID blockId; // 42
+	UseAnimation useAnimation; // 43
+	CreativeItemCategory creativeCategory; // 44
+	int filler2; // 48
+	void* colorFormat; // 52
+	TextureUVCoordinateSet& icon; // 56
+	TextureAtlasItem* customAtlasIcon; // 60
+	int filler3[7]; // 64
+	float vrHandControllerScale; // 92
+	std::unique_ptr <FoodItemComponent> _foodDetails; // 96
+	std::unique_ptr <SeedItemComponent> _seedDetails; // 100
+	std::unique_ptr <CameraItemComponent> _cameraDetails; // 104
 
 	/* list */
 	static Item* mItems[4096];
+	static std::vector<ItemInstance> mCreativeList;
+	static Random* mRandom;
 
 	/* vtable */
 	virtual ~Item();
 	virtual Item* setIcon(const std::string&, int);
 	virtual Item* setIcon(const TextureUVCoordinateSet&);
-	virtual void setMaxStackSize(unsigned char);
-	virtual void setCategory(CreativeItemCategory);
-	virtual void setStackedByData(bool);
-	virtual void setMaxDamage(int);
-	virtual void setHandEquipped();
-	virtual void setUseAnimation(UseAnimation);
-	virtual void setMaxUseDuration(int);
+	virtual Item* setMaxStackSize(unsigned char);
+	virtual Item* setCategory(CreativeItemCategory);
+	virtual Item* setStackedByData(bool);
+	virtual Item* setMaxDamage(int);
+	virtual Item* setHandEquipped();
+	virtual Item* setUseAnimation(UseAnimation);
+	virtual Item* setMaxUseDuration(int);
+	virtual Item* setRequiresWorldBuilder(bool);
+	virtual Item* setExplodable(bool);
+	virtual Item* setIsGlint(bool);
+	virtual Item* setShouldDespawn(bool);
+	virtual BlockShape getBlockShape() const;
 	virtual bool canBeDepleted();
 	virtual bool canDestroySpecial(const Block*) const;
 	virtual int getLevelDataForAuxValue(int) const;
@@ -77,28 +113,33 @@ public:
 	virtual bool canDestroyInCreative() const;
 	virtual bool isLiquidClipItem(int) const;
 	virtual bool requiresInteract() const;
-	virtual const std::string& appendFormattedHovertext(const ItemInstance&, const Player&, std::string&, bool) const;
+	virtual std::string appendFormattedHovertext(const ItemInstance&, Level&, std::string&, bool) const;
 	virtual bool isValidRepairItem(const ItemInstance&, const ItemInstance&);
 	virtual int getEnchantSlot() const;
 	virtual int getEnchantValue() const;
 	virtual bool isComplex() const;
-	virtual int getColor(const ItemInstance&) const;
+	virtual bool isValidAuxValue(int) const;
+    virtual int getDamageChance(int) const;
+	virtual int uniqueAuxValues() const;
+	virtual Color getColor(const ItemInstance&) const;
 	virtual bool use(ItemInstance&, Player&);
-	virtual bool useOn(ItemInstance*, Player*, int, int, int, signed char, float, float, float);
+	virtual bool useOn(ItemInstance&, Entity&, int, int, int, signed char, float, float, float);
 	virtual void dispense(BlockSource&, Container&, int, const Vec3&, signed char);
-	virtual void useTimeDepleted(ItemInstance*, Level*, Player*);
-	virtual void releaseUsing(ItemInstance*, Player*, int);
-	virtual float getDestroySpeed(ItemInstance*, Block*);
+	virtual FoodItemComponent useTimeDepleted(ItemInstance*, Level*, Player*);
+	virtual CameraItemComponent releaseUsing(ItemInstance*, Player*, int);
+	virtual float getDestroySpeed(ItemInstance*, const Block*);
 	virtual void hurtEnemy(ItemInstance*, Mob*, Mob*);
-	virtual void interactEnemy(ItemInstance*, Mob*, Player*);
-	virtual void mineBlock(ItemInstance*, BlockID, int, int, int, Mob*);
+	virtual CameraItemComponent interactEnemy(ItemInstance*, Mob*, Player*);
+	virtual bool mineBlock(ItemInstance*, BlockID, int, int, int, Entity*);
 	virtual const std::string buildDescriptionName(const ItemInstance&) const;
 	virtual const std::string buildEffectDescriptionName(const ItemInstance&) const;
 	virtual void readUserData(ItemInstance*, IDataInput&) const;
-	virtual void writeUserData(const ItemInstance*, IDataOutput&, bool) const;
+	virtual void writeUserData(const ItemInstance*, IDataOutput&) const;
 	virtual int getMaxStackSize(const ItemInstance*);
 	virtual void inventoryTick(ItemInstance&, Level&, Entity&, int, bool);
-	virtual void onCraftedBy(ItemInstance&, Level&, Player&);
+	virtual bool onCraftedBy(ItemInstance&, Level&, Player&);
+	virtual int getCooldownType() const;
+	virtual int getCooldownTime() const;
 	virtual const std::string& getInteractText(const Player&) const;
 	virtual int getAnimationFrameFor(Mob&) const;
 	virtual bool isEmissive(int) const;
@@ -106,21 +147,22 @@ public:
 	virtual int getIconYOffset() const;
 	virtual bool isMirroredArt() const;
 
-	/* member functions */
-	void init(Json::Value&);
-
-	/* static functions */
-	static TextureUVCoordinateSet getTextureUVCoordinateSet(const std::string&, int);
-	static void initItems();
+	/* static function */
+	static TextureUVCoordinateSet* getTextureUVCoordinateSet(const std::string&, int);
+	static void initClientData();
+	static void initServerData(ResourcePackManager&);
+	static void initClient(Json::Value&, Json::Value&);
+	static void initServer(Json::Value&);
 	static void addBlockItems();
 	static void initCreativeItems();
-	static void addCreativeItem(Block*, short);
+	static void addCreativeItem(const Block*, short);
 	static void addCreativeItem(Item*, short);
 	static void addCreativeItem(const ItemInstance&);
 	static void addCreativeItem(short, short);
+	static void registerItems();
 
 	static Item* mShovel_iron; // 256
-	static Item* mPickaxe_iron; // 257
+	static Item* mPickAxe_iron; // 257
 	static Item* mHatchet_iron; // 258
 	static Item* mFlintAndSteel; // 259
 	static Item* mApple; // 260
@@ -137,22 +179,22 @@ public:
 	static Item* mHatchet_wood; // 271
 	static Item* mSword_stone; // 272
 	static Item* mShovel_stone; // 273
-	static Item* mPickaxe_stone; // 274
+	static Item* mPickAxe_stone; // 274
 	static Item* mHatchet_stone; // 275
 	static Item* mSword_diamond; // 276
 	static Item* mShovel_diamond; // 277
-	static Item* mPickaxe_diamond; // 278
+	static Item* mPickAxe_diamond; // 278
 	static Item* mHatchet_diamond; // 279
 	static Item* mStick; // 280
-	static Item* mBowl; //281
-	//Mushroom Soup// 282
+	static Item* mBowl; // 281
+	static Item* mMushroomStew; // 282
 	static Item* mSword_gold; // 283
 	static Item* mShovel_gold; // 284
-	static Item* mPickaxe_gold; // 285
+	static Item* mPickAxe_gold; // 285
 	static Item* mHatchet_gold; // 286
 	static Item* mString; // 287
 	static Item* mFeather; // 288
-	//Gundpowder // 289
+	static Item* mSulphur; // 289
 	static Item* mHoe_wood; // 290
 	static Item* mHoe_stone; // 291
 	static Item* mHoe_iron; // 292
@@ -187,7 +229,7 @@ public:
 	static Item* mPainting; // 321
 	static Item* mApple_gold; // 322
 	static Item* mSign; // 323
-	static Item* Door_wood; // 324
+	static Item* mDoor_wood; // 324
 	static Item* mBucket; // 325
 	static Item* mMinecart; // 328
 	static Item* mSaddle; // 329
@@ -207,7 +249,7 @@ public:
 	static Item* mCompass; // 345
 	static Item* mFishingRod; // 346
 	static Item* mClock; // 347
-	//Glowstone Dust // 348
+	static Item* mYellowDust; // 348
 	static Item* mFish_raw_cod; // 349
 	static Item* mFish_raw_salmon; // 349, 1
 	static Item* mFish_raw_clownfish; // 349, 2
@@ -221,7 +263,7 @@ public:
 	static Item* mBed; // 355
 	static Item* mRepeater; // 356
 	static Item* mCookie; // 357
-	static Item* mEmptyMap; // 358
+	static Item* mFilledMap; // 358
 	static Item* mShears; // 359
 	static Item* mMelon; // 360
 	static Item* mSeeds_pumpkin; // 361
@@ -233,4 +275,29 @@ public:
 	static Item* mRotten_flesh; // 367
 	static Item* mBlazeRod; // 369
 	static Item* mGhast_tear; // 370
+	static Item* mGold_nugget; // 371
+	static Item* mNether_wart; // 372
+	static Item* mPotion; // 373
+	static Item* mGlass_bottle; // 374
+	static Item* mSpider_eye; // 375
+	static Item* mFermented_spider_eye; // 376
+	static Item* mBlazePowder; // 377
+	static Item* mMagma_cream; // 378
+	static Item* mBrewing_stand; // 379
+	static Item* mCauldron; // 380
+	static Item* mEnderEye; // 381
+	static Item* mSpeckled_melon; // 382
+	static Item* mMobPlacer; // 383
+	static Item* mExperiencePotionItem; // 384
+	static Item* mFireCharge; // 385
+	static Item* mEmerald; // 388
+	static Item* mItemFrame; // 389
+	static Item* mFlowerPot; // 390
+	static Item* mCarrot; // 391
+	static Item* mPotato; // 392
+	static Item* mPotatoBaked; // 393
+	static Item* mPoisonous_potato; // 394
+	static Item* mEmptyMap; // 395
+	static Item* mGoldenCarrot; // 396
+
 };

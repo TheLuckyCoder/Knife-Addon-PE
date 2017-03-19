@@ -8,3 +8,4 @@ LOCAL_SRC_FILES := $(LOCAL_SRC_FILES_RAW:$(LOCAL_PATH)/%=%)
 LOCAL_LDLIBS    := -L$(LOCAL_PATH) -llog -ldl -lminecraftpe -lmcpelauncher_tinysubstrate
 TARGET_NO_UNDEFINED_LDFLAGS :=
 include $(BUILD_SHARED_LIBRARY)
+

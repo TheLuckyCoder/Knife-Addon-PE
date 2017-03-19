@@ -5,11 +5,12 @@
 class KnifeItem : public Item
 {
 public:
-	KnifeItem(short itemId, const std::string &name, int type, int damage);
+	KnifeItem(short id, const std::string &name, short damage);
 
 	virtual bool canDestroyInCreative() const;
 	virtual int getEnchantSlot() const;
 	virtual int getEnchantValue() const;
 	virtual void hurtEnemy(ItemInstance*, Mob*, Mob*);
-	virtual void mineBlock(ItemInstance*, BlockID, int, int, int, Mob*);
+	virtual bool mineBlock(ItemInstance*, BlockID, int, int, int, Entity*);
 };
+

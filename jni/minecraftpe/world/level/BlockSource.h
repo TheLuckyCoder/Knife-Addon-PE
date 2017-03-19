@@ -1,10 +1,11 @@
 #pragma once
+
 class Block;
 struct BlockPos;
 class Material;
 class BlockEntity;
 class Level;
-#include "../../CommonTypes.h"
+#include "FullBlock.h"
 
 class BlockSource {
 public:
@@ -22,10 +23,10 @@ public:
 	Level* getLevel() const;
 	Block* getBlock(int, int, int);
 	Block* getBlock(const BlockPos&);
-	FullBlock getBlockID(int, int, int);
-	FullBlock getBlockID(const BlockPos&);
-	DataID getData(int, int, int);
-	DataID getData(const BlockPos&);
+	int getBlockID(int, int, int);
+	int getBlockID(const BlockPos&);
+	int getData(int, int, int);
+	int getData(const BlockPos&);
 	Material& getMaterial(int, int, int);
 	Material& getMaterial(const BlockPos&);
 	bool setBlockAndData(int, int, int, BlockID, unsigned char, int);
@@ -43,3 +44,4 @@ public:
 	int getTopSolidBlock(const BlockPos&, bool);
 	int getTopSolidBlock(int, int, bool);
 };
+

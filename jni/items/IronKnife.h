@@ -5,7 +5,8 @@
 class IronKnife : public KnifeItem
 {
 public:
-	IronKnife(short itemId);
+	IronKnife(short id);
 
 	virtual int getAttackDamage();
 };
+

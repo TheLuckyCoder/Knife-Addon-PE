@@ -1,15 +1,14 @@
 #pragma once
 
 #include "Item.h"
-#include "ItemInstance.h"
-
+class ItemInstance;
 class Color;
 
 enum class ArmorSlot : int {
-	HELMET,
-	CHESTPLATE,
-	LEGGINGS,
-	BOOTS
+	Helmet,
+	Chestplate,
+	Leggings,
+	Boots
 };
 
 // Size : 88
@@ -32,36 +31,35 @@ public:
 		int getHealthForSlot(int);
 	};
 
-public:
-	static ArmorMaterial CHAIN;
-	static ArmorMaterial CLOTH;
-	static ArmorMaterial DIAMOND;
 	static ArmorMaterial GOLD;
 	static ArmorMaterial IRON;
+	static ArmorMaterial CHAIN;
+	static ArmorMaterial CLOTH;
+	static ArmorMaterial ELYTRA;
+	static ArmorMaterial DIAMOND;
 	static int mHealthPerSlot[10];
 
-public:
 	ArmorSlot armorType;			// 68
 	int defence;					// 72
 	int renderIndex;				// 76
 	ArmorMaterial& armorMaterial;	// 80
 
-public:
 	ArmorItem(const std::string&, int, const ArmorItem::ArmorMaterial&, int, ArmorSlot);
 	
-	virtual ~ArmorItem();
+	//virtual ~ArmorItem();
 	virtual bool isArmor() const;
-	virtual const std::string& appendFormattedHovertext(const ItemInstance&, const Player&, std::string&, bool) const;
+	virtual std::string appendFormattedHovertext(const ItemInstance&, Level&, std::string&, bool) const;
 	virtual bool isValidRepairItem(const ItemInstance&, const ItemInstance&);
 	virtual int getEnchantSlot() const; 
 	virtual int getEnchantValue() const;
-    virtual int getColor(const ItemInstance&) const;
+    virtual Color getColor(const ItemInstance&) const;
     virtual void dispense(BlockSource&, Container&, int, const Vec3&, signed char);
 	
-	ItemInstance getTierItem() const;
+	ItemInstance* getTierItem() const;
 	bool hasCustomColor(const ItemInstance&) const;
 	void setColor(ItemInstance&, const Color&);
 	void clearColor(ItemInstance&);
 	int getSlotForItem(const ItemInstance&);
 	static Item* getArmorForSlot(ArmorSlot, int);
+	bool isFlyEnabled(const ItemInstance&);
 };

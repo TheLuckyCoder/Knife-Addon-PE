@@ -1,9 +1,10 @@
 #include "StoneKnife.h"
 
-StoneKnife::StoneKnife(short itemId) : KnifeItem(itemId, "stone", 1, 66)
+StoneKnife::StoneKnife(short id) : KnifeItem(id, "stone", 66)
 {}
 
 int StoneKnife::getAttackDamage()
 {
 	return (Item::mSword_stone->getAttackDamage() / 2);
 }
+

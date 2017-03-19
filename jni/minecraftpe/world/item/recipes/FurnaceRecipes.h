@@ -2,7 +2,8 @@
 
 class ItemInstance;
 
-class FurnaceRecipes {
+class FurnaceRecipes
+{
 public:
 	FurnaceRecipes();
 	
@@ -10,9 +11,12 @@ public:
 	static FurnaceRecipes* getInstance();
 	static void teardownFurnaceRecipes();
 	static void clearFurnaceRecipes();
+	static void _init();
 	
 	void addFurnaceRecipe(int, const ItemInstance&);
 	void addFurnaceRecipeAuxData(short, short, const ItemInstance&);
-	void getResult(ItemInstance*);
-	bool isFurnaceItem(ItemInstance*);
+	void getResult(const ItemInstance*);
+	bool isFurnaceItem(const ItemInstance*);
+	void init();
 };
+

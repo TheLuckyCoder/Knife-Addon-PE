@@ -1,3 +1,5 @@
 # Knife-Mod-MCPE
-This mod adds Knifes to Minecraft PE
+BlockLauncher Addon which adds Knifes to Minecraft PE
+
+Anyone can use this code.
 

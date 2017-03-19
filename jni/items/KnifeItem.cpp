@@ -1,12 +1,12 @@
 #include "KnifeItem.h"
 #include "minecraftpe/world/item/ItemInstance.h"
-#include "minecraftpe/world/level/block/Block.h"
+#include "minecraftpe/world/entity/Mob.h"
 
-KnifeItem::KnifeItem(short itemId, const std::string &name, int type, int damage) : Item((name + "Knife"), itemId - 256)
+KnifeItem::KnifeItem(short id, const std::string &name, short damage) : Item((name + "Knife"), id - 256)
 {
 	Item::mItems[itemId] = this;
-	setCategory(CreativeItemCategory::TOOLS);
-	setIcon("knife", type);
+	setCategory(CreativeItemCategory::Tools);
+	setIcon("knife_" + name, 0);
 	setMaxStackSize(1);
 	setMaxDamage(damage);
 	setHandEquipped();
@@ -27,12 +27,14 @@ int KnifeItem::getEnchantValue() const
 	return 1;
 }
 
-void KnifeItem::hurtEnemy(ItemInstance *item, Mob *attacker, Mob *victim)
+void KnifeItem::hurtEnemy(ItemInstance *item, Mob*, Mob *victim)
 {
 	item->hurtAndBreak(1, victim);
 }
 
-void KnifeItem::mineBlock(ItemInstance *item, BlockID block, int x, int y, int z, Mob *mob)
+bool KnifeItem::mineBlock(ItemInstance *item, BlockID, int, int, int, Entity *entity)
 {
-	item->hurtAndBreak(2, mob);
+	item->hurtAndBreak(2, entity);
+	return true;
 }
+

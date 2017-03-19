@@ -1,10 +1,8 @@
 #pragma once
+
 #include "Item.h"
-#include "../../CommonTypes.h"
 
 class BlockItem : public Item {
-	BlockID block;
-
 public:
 	BlockItem(const std::string&, int);
 

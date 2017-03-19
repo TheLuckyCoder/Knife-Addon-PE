@@ -2,11 +2,16 @@
 
 #include <vector>
 #include <string>
-#include "../ItemInstance.h"
 
-class Recipes {
+#include "../ItemInstance.h"
+class Item;
+class Block;
+
+class Recipes
+{
 public:
-	struct Type {
+	struct Type
+	{
 		Item* item;
 		Block* block;
 		ItemInstance inst;
@@ -14,8 +19,9 @@ public:
 	};
 
 	static Recipes* getInstance();
-	static Recipes* instance;
+	static Recipes* mInstance;
 
 	void init();
 	void addShapedRecipe(const ItemInstance&, const std::vector<std::string>&, const std::vector <Recipes::Type>&);
 };
+
